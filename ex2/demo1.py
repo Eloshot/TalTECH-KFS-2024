@@ -43,7 +43,7 @@ def on_message(client, userdata, message):
 
         draw.text((28,20),str(message.payload.decode("utf-8")), font = font, fill = 0)
     except IOError as e:
-    print(e)
+        print(e)
 
 client= paho.Client("client-006") #create client object client1.on_publish = on_publish #assign function to callback client1.connect(broker,port) #establish connection client1.publish("house/bulb1","on")
 
