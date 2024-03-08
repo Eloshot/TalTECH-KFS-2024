@@ -30,7 +30,20 @@ try:
 # Define callback
 def on_message(client, userdata, message):
     time.sleep(1)
-    draw.text((28,20),str(message.payload.decode("utf-8")), font = font, fill = 0)
+    try:
+    
+        disp = SH1106.SH1106()
+        
+         print("\r\1.3inch OLED")
+        # Initialize library.
+        disp.Init()
+        # Clear display.
+        disp.clear()
+        image1 = Image.new('1', (disp.width, disp.height), "WHITE")
+
+        draw.text((28,20),str(message.payload.decode("utf-8")), font = font, fill = 0)
+    except IOError as e:
+    print(e)
 
 client= paho.Client("client-006") #create client object client1.on_publish = on_publish #assign function to callback client1.connect(broker,port) #establish connection client1.publish("house/bulb1","on")
 
@@ -55,3 +68,4 @@ except KeyboardInterrupt:
     print("exiting")
     client.disconnect() #disconnect
     client.loop_stop() #stop loop
+
